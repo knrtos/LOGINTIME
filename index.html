@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Login Page</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: transparent;
+        }
+        .container {
+            display: flex;
+            width: 800px;
+            height: 400px;
+            background: rgba(255, 253, 230, 0.939);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+        }
+        .left-side {
+            width: 50%;
+            background: linear-gradient(135deg, #000000, #82a436);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+        .left-side img {
+            width: 300px;
+            height: 300px;
+            object-fit: contain;
+        }
+        .right-side {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+        .login-container {
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 253, 245, 0.939);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+        }
+        .title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #374151;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            outline: none;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .login-btn {
+            width: 100%;
+            background: #82a436;
+            color: white;
+            font-weight: bold;
+            padding: 12px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .error {
+            color: #ef4444;
+            font-weight: bold;
+            margin-top: 8px;
+            display: none;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-side">
+            <img src="nurse1.png" alt="Nurse Image">
+        </div>
+        <div class="right-side">
+            <div class="login-container">
+                <h2 class="title">WELCOME!</h2>
+                <form id="loginForm">
+                    <div class="input-group">
+                        <input type="text" id="username" class="input-field" placeholder="Username" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="password" class="input-field" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="login-btn">LOGIN</button>
+                    <p class="error" id="errorMessage">Invalid username or password!</p>
+                </form>
+                
+                <!-- Profile links (Hidden until correct login) -->
+                <div id="profileLinks" class="hidden">
+                    <p>Login successful! Click below:</p>
+                    <a id="userProfileLink" href="#" class="login-btn" target="_blank">Go to Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const validUsers = {
+                "Clyde": "https://sites.google.com/view/feu-medrecords/clyde",
+                "Jewel": "https://sites.google.com/view/feu-medrecords/jewel",
+                "Lucas": "https://sites.google.com/view/feu-medrecords/lucas",
+                "Clarabelle": "https://sites.google.com/view/feu-medrecords/clarabelle",
+                "Xena": "https://sites.google.com/view/feu-medrecords/xena"
+            };
+
+            const username = document.getElementById("username").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const errorMessage = document.getElementById("errorMessage");
+            const profileLinks = document.getElementById("profileLinks");
+            const userProfileLink = document.getElementById("userProfileLink");
+
+            if (validUsers[username] && username === password) {
+                errorMessage.style.display = "none";  // Hide error message
+                profileLinks.classList.remove("hidden");  // Show profile link
+                userProfileLink.href = validUsers[username];  // Set correct profile URL
+            } else {
+                errorMessage.style.display = "block";  // Show error message
+                profileLinks.classList.add("hidden");  // Hide profile link
+            }
+        });
+    </script>
+</body>
+</html>
